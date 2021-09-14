@@ -32,7 +32,7 @@ app.get("/city", function (req, res) {
     }
     c = Array.from(s)
       .sort()
-      .sort((a, b) => b.length - a.length);
+      .sort((a, b) => a.length - b.length);
     return res.json(c);
   }
   res.json(city);
