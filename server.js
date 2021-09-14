@@ -23,8 +23,7 @@ app.get("/", function (req, res) {
     req.query.city[0].toUpperCase() + req.query.city.slice(1).toLowerCase();
   if (q.length < 4) {
     return res.json([]);
-  }
-  res.json(city.filter((c) => c.owm_city_name.includes(q)));
+  } else res.json(city.filter((c) => c.owm_city_name.includes(q)));
 });
 
 const port = 5050;
