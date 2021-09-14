@@ -7,9 +7,9 @@ app.use(express.json());
 const city = require("./city.json");
 const model = require("./model");
 // console.log();
-require("./db")(function (err, db) {
-  console.log("DB connected");
-});
+// require("./db")(function (err, db) {
+//   console.log("DB connected");
+// });
 
 // app.get("/city", async (req, res) => {
 //   console.log("seeding data");
