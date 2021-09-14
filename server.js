@@ -17,6 +17,7 @@ const model = require("./model");
 //   });
 //   res.json(m);
 // });
+app.use(require("cors")());
 app.get("/city", function (req, res) {
   let q = req.query.search;
   city = [];
