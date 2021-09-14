@@ -17,14 +17,36 @@ const model = require("./model");
 //   });
 //   res.json(m);
 // });
-app.get("/", function (req, res) {
-  const q =
-    req.query.city[0].toUpperCase() + req.query.city.slice(1).toLowerCase();
-  if (q.length < 4) {
-    return res.json([]);
-  } else res.json(require("./city.json").filter((c) => c.owm_city_name.includes(q)));
-});
+app.get("/city", function (req, res) {
+  let q = req.query.search;
+  city = [];
+  if (q && q.length >= 4) {
+    q = q[0].toUpperCase() + q.slice(1).toLowerCase();
 
+    let c = require("./city.json").filter((c) => c.owm_city_name.includes(q));
+    let s = new Set();
+    for (let item in c) {
+      //   console.log(item);
+      s.add(c[item].owm_city_name);
+    }
+    return res.json(Array.from(s).sort());
+  }
+  res.json(city);
+});
+app.get("/country", function (req, res) {
+  const country = require("./city.json");
+  let s = new Set();
+  for (let item in country) {
+    s.add(country[item].country_long);
+  }
+  res.json(Array.from(s).sort());
+});
+app.get("/", (req, res) => {
+  res.json({
+    message: "Hello World!",
+    list: ["/city?search=query", "/country"],
+  });
+});
 const port = process.env.PORT || 5050;
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
