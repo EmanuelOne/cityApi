@@ -30,7 +30,7 @@ app.get("/city", function (req, res) {
       //   console.log(item);
       s.add(c[item].owm_city_name);
     }
-    return res.json(Array.from(s).sort());
+    return res.json(Array.from(s).sort((a, b) => b.length - a.length));
   }
   res.json(city);
 });
