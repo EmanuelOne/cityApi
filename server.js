@@ -5,11 +5,19 @@ const path = require("path");
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.json());
 const city = require("./city.json");
+const model = require("./model");
 // console.log();
-// require("./db")(function (err, db) {
-//   console.log("DB connected");
-// });
+require("./db")(function (err, db) {
+  console.log("DB connected");
+});
 
+// app.get("/city", async (req, res) => {
+//   console.log("seeding data");
+//   const m = await model.insertMany(city, (err, res) => {
+//     console.log("Sent " + res.insertedCount + " documents");
+//   });
+//   res.json(m);
+// });
 app.get("/", function (req, res) {
   const q =
     req.query.city[0].toUpperCase() + req.query.city.slice(1).toLowerCase();
@@ -19,7 +27,6 @@ app.get("/", function (req, res) {
   res.json(city.filter((c) => c.owm_city_name.includes(q)));
 });
 
-app.get("/:country", (req, res) => {});
 const port = 5050;
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
