@@ -26,7 +26,7 @@ app.get("/", function (req, res) {
   } else res.json(city.filter((c) => c.owm_city_name.includes(q)));
 });
 
-const port = 5050;
+const port = process.env.PORT || 5050;
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });
