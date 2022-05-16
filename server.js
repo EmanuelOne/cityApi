@@ -20,11 +20,11 @@ const model = require("./model");
 app.use(require("cors")());
 app.get("/city", function (req, res) {
   let q = req.query.search;
-  city = [];
+  let city = [];
   if (q && q.length >= 4) {
     q = q[0].toUpperCase() + q.slice(1).toLowerCase();
 
-    let c = require("./city.json").filter((c) => c.owm_city_name.includes(q));
+    let c = require("./city.json").filter((c) => c.country_long.includes(q));
     let s = new Set();
     for (let item in c) {
       //   console.log(item);
